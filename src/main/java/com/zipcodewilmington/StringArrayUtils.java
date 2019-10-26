@@ -149,23 +149,35 @@ public class StringArrayUtils {
     }
 
     /**
-     * @param array array of chars
+     * @param input array of chars
      * @return array of Strings with consecutive duplicates removes
      */ // TODO
-    public static String[] removeConsecutiveDuplicates(String[] array) {
-        List<String> resultAsList = new ArrayList<>();
+    public static String[] removeConsecutiveDuplicates(String[] input) {
+        List<String> list = new ArrayList<>();
+        // always add initial value
+        String firstValue = input[0];
+        list.add(firstValue);
 
-        int size = array.length;
-        for (int i = 0; i <size-1; i++) {
-            String currentElement = array[i];
-            String nextElement = array[i+1];
-            if(currentElement == nextElement) {
-                resultAsList.add(currentElement);
-                i++;
+        // Iterate the remaining values
+        for (int currentIndex = 1; currentIndex < input.length; currentIndex++) {
+            // get previous value
+            String previousValue = input[currentIndex-1];
+
+            // get current value
+            String currentValue = input[currentIndex];
+
+            // Compare current value to previous
+            if (previousValue.equals(currentValue)) {
+
+                // add if same value
+                list.add(currentValue);
             }
         }
-        return resultAsList.toArray(new String[0]);
+
+        // convert list to array
+        return list.toArray(new String[0]);
     }
+
 
     /**
      * @param array array of chars
